@@ -58,7 +58,7 @@ Page({
   },
    onShareAppMessage: function () {
     return {
-      title: '关于“守望轩”官方小程序',
+      title: '关于“代码之城”官方小程序',
       path: 'pages/about/about',
       success: function (res) {
         // 转发成功

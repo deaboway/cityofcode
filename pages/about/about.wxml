@@ -3,34 +3,21 @@
   <template is="tempHeader" />
   <view class="about-article ">
     <view class="about-title">
-      关于“守望轩”官方小程序
+      关于“代码之城”
     </view>
     
 
      <view class="about-desc">
-      “守望轩”官方小程序采用WordPress rest api作为后端服务,将微信小程序和WordPress结合，通过微信小程序访问WordPress网站。
+      “代码之城”小程序文章来源于deaboway的个人网站，并与“代码之城”微信公众号绑定。
+    </view>
+
+
+    <view class="about-desc">
+      deaboway的网站地址：http://www.deaboway.com
     </view>
 
     <view class="about-desc">
-      “守望轩”官方小程序部分采用了开源的产品的代码,秉承开源思想,本程序是开放源代码的。
-    </view>
-
-    <view class="about-desc">
-      github：https://github.com/iamxjb/winxin-app-watch-life.net
-    </view>
-     <view class="about-desc">
-      开源协议：MIT
-    </view>
-
-    <view class="about-desc">
-      技术支持网站：https://www.watch-life.net
-    </view>
-
-    <view class="about-desc">
-      开发者：Jianbo
-    </view>
-    <view class="about-desc">
-      微信号：iamxjb
+      本程序采用基于MIT开源协议的“守望轩”小程序，感谢开发者：Jianbo
     </view>
   </view>
 </view>

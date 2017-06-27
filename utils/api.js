@@ -9,7 +9,7 @@
  * Copyright (c) 2017 https://www.watch-life.net All rights reserved.
  */
 
-var HOST_URI = 'https://www.watch-life.net/wp-json/wp/v2/';
+var HOST_URI = 'https://www.deaboway.com/wp-json/wp/v2/';
 
 
 module.exports = {
@@ -81,7 +81,7 @@ module.exports = {
   getContentFirstImage: function (content){
     var regex = /<img.*?src=[\'"](.*?)[\'"].*?>/i;
     var arrReg = regex.exec(content);
-    var src ="../../images/watch-life-logo-128.jpg";
+    var src ="../../images/deaboway-logo-132.jpg";
     if(arrReg){   
       src=arrReg[1];
     }
