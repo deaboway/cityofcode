@@ -106,15 +106,13 @@ Page({
     if (options.categoryID && options.categoryID != 0) {
       self.setData({
         categories: options.categoryID,
-        listHeader: "分类：'" + options.categoryName +"'的文章"
+        listHeader: "目录：" + options.categoryName +""
       })
     }
     if (options.search && options.search != '') {
       self.setData({
         search: options.search,
-        listHeader: "搜索包含'" + options.search + "'文章"
-
-
+        listHeader: "以下是包含'" + options.search + "'文章"
       })
     }
 

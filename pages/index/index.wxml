@@ -18,8 +18,7 @@
   <view class="slide-mask" style="display:{{maskDisplay}}" bindtap="slideCloseEvent"></view>
   <view class="slide-menu" style="right: {{slideRight}}px;width: {{slideWidth}}px;height:{{slideHeight}}px;" animation="{{slideAnimation}}">
     <scroll-view scroll-y="true" style="height:100%;width:100%">
-      <view class="header">
-      <!--
+      <!--<view class="header">
         <view class="toolbar">
           <block wx:key="id" wx:for="{{pagesList}}">
             <block wx:if="{{item.id !=29 && item.id !=32 }}">
@@ -28,23 +27,22 @@
               </view>
             </block>
           </block>
-        </view>-->
-        <icon type="cancel" size="30" class="close-btn" color="#FFF" bindtap="slideCloseEvent" />
-      </view>
-      <!--
+        </view>
+      </view>-->
       <view class="menu-item home">
-        <image src="../../images/home.png" class="home-icon"></image>
+        <image src="../../images/tar-home.png" class="home-icon"></image>
         <navigator url="/pages/index/index" open-type ="switchTab">
-          <text class="home-text">Home</text>
+          <text class="home-text">首页</text>
         </navigator>
-      </view> -->
+        <icon type="cancel" size="30" class="close-btn" color="#424242" bindtap="slideCloseEvent" />
+      </view>
 
       <view class="slide-inner">
         <view class="search-section">
           <form catchsubmit="formSubmit" catchreset="formReset">
             <view class="search-pancel">
               <input value="" name="input" class="search-input" placeholder="请输入搜索内容..." />
-              <button class="search-button" form-type="submit" size="mini" plain="true">搜索</button>
+              <button class="search-button" form-type="submit" plain="true">搜索</button>
             </view>
           </form>
         </view>
@@ -67,10 +65,7 @@
 
 
     <view class="header" style="display:{{displayHeader}}">
-    <image src="../../images/logo.gif" style="height:120rpx;width:400rpx"></image>
-    <view>
-      no Pain no Gain no Gavin.
-    </view>
+    <image src="../../images/qrcode-web.jpg" style="height:205rpx;width:400rpx"></image>
   </view>
 
     <view class="index-header" style="display:{{displaySwiper}}">

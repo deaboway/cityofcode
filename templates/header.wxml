@@ -12,10 +12,10 @@
 
 <template name="tempHeader">
   <view class="header">
-    <image src="../../images/logo.gif" style="height:120rpx;width:400rpx"></image>
-    <view>
+    <image src="../../images/qrcode-web.jpg" style="height:205rpx;width:400rpx"></image>
+    <!--<view>
       no Pain no Gain no Gavin
-    </view>
+    </view>-->
   </view>
 </template>
 <!-- header end -->

@@ -180,7 +180,7 @@ Page({
   formSubmit: function (e) { 
     var self = this;   
     var name = self.data.userInfo.nickName;
-    var email = "test@test.com";
+    var email = "wechat@restapi.com";
     var comment = e.detail.value.inputComment;
     var author_url =  self.data.userInfo.avatarUrl;
     
@@ -223,9 +223,7 @@ Page({
               self.setData({
                 'dialog.hidden': false,
                 'dialog.title': '提示',
-                'dialog.content': '评论成功',
-                content: ''
-
+                'dialog.content': '评论已经提交，等待系统管理员审核后显示。',
               });
 
               self.fetchCommentData(self.data);

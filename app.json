@@ -9,14 +9,14 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#21759b",
+    "navigationBarBackgroundColor": "#424242",
     "navigationBarTitleText": "代码之城",
     "navigationBarTextStyle": "#fff"
    
   },
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#21759b",
+    "selectedColor": "#424242",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [

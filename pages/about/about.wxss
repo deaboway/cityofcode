@@ -10,32 +10,34 @@
  * 
  */
 .about-title {
-    font-size: 50rpx;
+    font-size: 40rpx;
     line-height: 1.2;
     font-weight:normal;
     outline: none;
-    color: #21759b;
+    color: #424242;
     margin-bottom:25rpx;
     text-align:center
 }
 
 .about-summary{
-  font-size: 35rpx;  
+  font-size: 30rpx;  
   line-height:1.8rem;
   text-align:center
   
 }
 
 .about-desc{
-  font-size: 35rpx;  
+  font-size: 30rpx;  
   line-height:1.8rem;
   text-align:left;
   margin-top: 20rpx
 
 }
 
-.about-article {
-    margin-bottom: 1.142857143rem ;
-    
+.about-thx {
+  font-size: 24rpx;   
+  line-height:1.8rem;
+  text-align:left;
+  margin-top: 30rpx
 }
 

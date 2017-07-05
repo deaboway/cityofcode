@@ -10,14 +10,14 @@
  */
 
 .list-header {
-  padding: 50rpx 0;
+  padding: 40rpx 0;
   text-align: left;
   font-weight: normal;
-  font-size: 40rpx;
-  line-height: 40rpx;
-  color: #21759b;
+  font-size: 30rpx;
+  line-height: 30rpx;
+  color: #424242;
   border-bottom: 2rpx solid #ededed;
-  margin-bottom: 48rpx;
+  margin-bottom: 38rpx;
 }
 
 .index-header {
@@ -25,21 +25,21 @@
   text-align: center;
   font-weight: normal;
   font-size: 30rpx;
-  line-height: 40rpx;
+  line-height: 30rpx;
   color: #757575;
   border-bottom: 2rpx solid #ededed;
-  margin-bottom: 48rpx;
+  margin-bottom: 38rpx;
 }
 
 .float-action {
   position: absolute;
   bottom: 20px;
   right: 30px;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   box-shadow: 2px 2px 10px #aaa;
-  background: #21759b;
+  background: #424242;
   z-index: 100;
 }
 
@@ -48,7 +48,7 @@
   width: 100%;
   color: #fff;
   text-align: center;
-  line-height: 50px;
+  line-height: 40px;
   font-size: 14px;
 }
 
@@ -106,16 +106,16 @@
   position: relative;
   top: 10rpx;
   margin-right: 10rpx;
-  height: 50rpx;
-  width: 50rpx;
+  height: 40rpx;
+  width: 40rpx;
 }
 
 .slide-menu .menu-item {
   position: relative;
-  height: 100rpx;
-  line-height: 100rpx;
+  height: 90rpx;
+  line-height: 90rpx;
   padding: 0 40rpx;
-  font-size: 35rpx;
+  font-size: 30rpx;
 }
 
 .slide-menu .menu-item:active {
@@ -126,8 +126,8 @@
   position: absolute;
   top: 25rpx;
   left: 15rpx;
-  width: 50rpx;
-  height: 50rpx;
+  width: 40rpx;
+  height: 40rpx;
 }
 
 .home-icon {
@@ -139,6 +139,7 @@
 .home-text {
   position: absolute;
   left: 100rpx;
+  color:#424242;
 }
 
 .slide-menu .home {
@@ -158,13 +159,13 @@
   background-color: #eee;
   padding: 5px 10px;
   min-height: 1rem;
-  font-size: 30rpx;
+  font-size: 28rpx;
 }
 
 .search-button {
   flex: 2rpx;
   border: none !important;
-  color: #019dd6 !important;
+  font-size: 28rpx;
 }
 
 .search-section {
@@ -205,7 +206,7 @@
 }
 
 .common-list .list-item.has-img .content-title text {
-  font-size: 40rpx;
+  font-size: 30rpx;
   line-height: 1.2;
   font-weight: normal;
   text-overflow: -o-ellipsis-lastline;

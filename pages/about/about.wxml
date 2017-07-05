@@ -7,17 +7,28 @@
     </view>
     
 
-     <view class="about-desc">
-      “代码之城”小程序文章来源于deaboway的个人网站，并与“代码之城”微信公众号绑定。
+    <view class="about-desc">
+    - “代码之城”小程序文章来源于deaboway的个人网站，并与“代码之城”微信公众号绑定。
     </view>
 
 
     <view class="about-desc">
-      deaboway的网站地址：http://www.deaboway.com
+    - “代码之城”微信公众号:
+    </view>
+    <view class="about-summary">
+      <image src="../../images/qrcode_wechat.jpg" style="height:80vw;width:80vw"></image>
     </view>
 
+
     <view class="about-desc">
-      本程序采用基于MIT开源协议的“守望轩”小程序，感谢开发者：Jianbo
+    - deaboway的个人网站:
+    </view>
+    <view class="about-summary">
+      <image src="../../images/qrcode-web.jpg" style="height:41vw;width:80vw"></image>
+    </view>
+
+    <view class="about-thx">
+    本程序采用基于MIT开源协议的“守望轩”，感谢Jianbo
     </view>
   </view>
 </view>

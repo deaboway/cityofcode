@@ -104,7 +104,7 @@
   font-size: 0.785714286rem;
   font-weight: normal;
   color: #fff;
-  background-color: #21759b;
+  background-color: #424242;
   background-repeat: repeat-x;
   margin-top: 30rpx;
 }
