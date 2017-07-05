@@ -40,11 +40,11 @@
 }
 
 .entry-title {
-    font-size: 50rpx;
+    font-size: 40rpx;
     line-height: 1.2;
     font-weight:normal;
     outline: none;
-    color: #21759b;
+    color: #424242;
     margin-bottom:25rpx;
 }
 .entry-date {
@@ -52,7 +52,7 @@
     line-height: 1.2;
     font-weight:normal;
     outline: none;
-    color: #21759b;
+    color: #424242;
     margin-bottom:30rpx;
    
 }
@@ -73,7 +73,7 @@
 .top-bar-item {
   display:inline-block;
   width: 20%;
-  color: #21759b;
+  color: #424242;
   text-align: center;
   line-height: 36px;
   font-size: 14px;

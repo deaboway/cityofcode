@@ -129,13 +129,14 @@ Page({
             var strdate = item.date
             item.summary = strSummary;
             item.date = util.formatDateTime(strdate);
-            if (item.author_url.indexOf('wx.qlogo.cn') >0)
-            {
-              item.author_url = item.author_url.replace("http", "https");
+            if (item.author_url.indexOf('wx.qlogo.cn') != -1) {
+              if (item.author_url.indexOf('https') == -1) {
+                item.author_url = item.author_url.replace("http", "https");
+              }
             }
             else
             {
-              item.author_url ="../../images/gravatar.png";
+              item.author_url ="../../images/smile.png";
             }
             
             return item;

@@ -76,7 +76,7 @@
 }*/
 
 .slide-menu .header {
-  background: #21759b;
+  background: #424242;
   height: 40rpx;
   color: #fff;
   padding: 40rpx 40rpx 40rpx 40rpx;
