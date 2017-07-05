@@ -1,5 +1,9 @@
 MIT License
 
+Copyright (c) 2017 Deaboway
+
+Refer to：
+
 Copyright (c) 2017 Jianbo
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
