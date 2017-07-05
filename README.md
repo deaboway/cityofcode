@@ -3,7 +3,7 @@
 
 # "City Of Code" Wechat Official Account
 
-![weixin](http://www.deaboway.com/pubimgs/qrcode-wechat.jpg) 
+![weixin](http://www.deaboway.com/pubimgs/qrcode_wechat.jpg) 
 
 
 # Personal Website：http://www.deaboway.com
