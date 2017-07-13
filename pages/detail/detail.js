@@ -291,7 +291,7 @@ Page({
 
              
 
-              self.fetchCommentData(self.data);
+              // self.fetchCommentData(self.data); // gavin 后台审核，因此不需要刷新去取数据啦！
 
             }
             else {

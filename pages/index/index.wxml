@@ -56,7 +56,7 @@
        <view class="search-pancel">
           <input value="" name="input" confirm-type="搜索" class="search-input" placeholder="搜搜看..." ></input>
           <button class="search-button" form-type="submit" size="mini" plain="true">
-            <icon type="search" color="#296FD0" size="20"/>
+            <icon type="search" color="#02AC00" size="20"/>
           </button>
           <!--
           <button class="share-button" open-type="share" size="mini" plain="true">转发</button> -->
