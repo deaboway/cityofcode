@@ -5,7 +5,10 @@
     "pages/logs/logs",
     "pages/page/page",
     "pages/about/about",
-    "pages/list/list"
+    "pages/list/list",
+    "pages/topic/topic",
+    "pages/readlog/readlog"
+
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -22,14 +25,27 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/tar-home-hl.png",
-        "selectedIconPath": "images/tar-home.png",
+        "iconPath": "images/tar-home.png",
+        "selectedIconPath": "images/tar-home-on.png",
         "text": "首页"
+      },     
+      {
+        "pagePath": "pages/topic/topic",
+        "iconPath": "images/tar-topic.png",
+        "selectedIconPath": "images/tar-topic-on.png",
+        "text": "专题"
+      }
+      ,
+      {
+        "pagePath": "pages/readlog/readlog",
+        "iconPath": "images/tar-person.png",
+        "selectedIconPath": "images/tar-person-on.png",
+        "text": "我"
       },
       {
         "pagePath": "pages/about/about",
-        "iconPath": "images/tar-info-hl.png",
-        "selectedIconPath": "images/tar-info.png",
+        "iconPath": "images/tar-info.png",
+        "selectedIconPath": "images/tar-info-on.png",
         "text": "关于"
       }
     ]
