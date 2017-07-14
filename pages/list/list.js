@@ -51,7 +51,7 @@ Page({
   },
   onShareAppMessage: function () {
 
-    var title = "分享“守望轩”";
+    var title = "分享“代码之城”";
     var path =""
 
     if (this.data.categories && this.data.categories != 0 != 0)
@@ -272,13 +272,18 @@ Page({
       url: Api.getCategoryByID(id),
       success: function (response) {
         var catImage="";
-        if (typeof (response.data.category_thumbnail_image) == "undefined" || response.data.category_thumbnail_image == "")
+        if (typeof (response.data.description) == "undefined" || response.data.description == "")
         {
           catImage = "../../images/website.png";
         }
         else
         {
-          catImage = response.data.category_thumbnail_image;
+          var desc = response.data.description;
+          if (desc.indexOf("http") > 0 && desc.indexOf(".jpg") > 0) {
+            catImage = desc.substring(desc.indexOf("http"), desc.indexOf(".jpg")+4);
+          } else {
+            catImage = "../../images/website.png";
+          }
         }
 
         self.setData({

@@ -50,11 +50,18 @@ Page({
           floatDisplay:"block",
 
           categoriesList: self.data.categoriesList.concat(response.data.map(function (item) {
-            if (typeof (item.category_thumbnail_image) == "undefined" || item.category_thumbnail_image=="") 
+            if (typeof (item.description) == "undefined" || item.description == "") 
             {
-              item.category_thumbnail_image ="../../images/website.png";
-              
-            }  
+              item.description ="../../images/website.png";
+            } else {
+              var desc = item.description;
+              if (desc.indexOf("http") > 0 && desc.indexOf(".jpg") > 0) {
+                var realimg = desc.substring(desc.indexOf("http"), desc.indexOf(".jpg")+4);
+                item.description = realimg;
+              } else {
+                item.description = "../../images/website.png";
+              }
+            }
             return item;        
           })),
 

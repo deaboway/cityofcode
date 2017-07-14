@@ -5,14 +5,14 @@
       <block wx:key="id" wx:for="{{categoriesList}}">
         <view class="list-item" data-item="{{item.name}}" data-id="{{item.id}}" bindtap="redictIndex">
           <view>
-            <image src="{{item.category_thumbnail_image}}" class="cover"></image>
+            <image src="{{item.description}}" class="cover"></image>
           </view>
           <view class="content-title">
             <text>{{item.name}}</text>
           </view>
-          <view class="content-brief">
+          <!-- <view class="content-brief">
             <text>{{item.description}}</text>
-          </view>
+          </view> -->
         </view>  
              
       </block>

@@ -24,9 +24,9 @@
           <view class="topic-content-title">
             <text>{{categoriesList.name}}</text>
           </view>
-          <view class="topic-content-brief">
+          <!-- <view class="topic-content-brief">
             <text>{{categoriesList.description}}</text>
-          </view>
+          </view> -->
         </view>     
     </view>
 
