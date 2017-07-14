@@ -67,7 +67,7 @@
   font-weight: normal;
   font-size: 30rpx;
   line-height: 40rpx;
-  color: #757575;
+  color: #37383b;
 }
 
 .comment {
@@ -94,14 +94,14 @@
 }
 
 .comment-response {
-  color: #757575;
+  color: #37383b;
   font-size: 30rpx;
   line-height: 1.8rem;
   margin-bottom: 50rpx;
 }
 
 .comment-summary {
-  color: #757575;
+  color: #37383b;
   font-size: 30rpx;
   line-height: 1.2rem;
   margin-bottom: 10rpx;
@@ -109,7 +109,7 @@
 }
 
 .comment-post {
-  color: #757575;
+  color: #37383b;
   font-size: 30rpx;
   line-height: 1.8rem;
   margin-bottom: 50rpx;

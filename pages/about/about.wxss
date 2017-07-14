@@ -14,7 +14,7 @@
     line-height: 1.2;
     font-weight:normal;
     outline: none;
-    color: #424242;
+    color: #37383b;
     margin-bottom:25rpx;
     text-align:center
 }

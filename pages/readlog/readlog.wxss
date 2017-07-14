@@ -29,7 +29,7 @@
 
 .dec-text{
    font-size: 25rpx; 
-  color: #757575;
+  color: #37383b;
 }
 .userinfo-nickname {
   color: #aaa;
@@ -47,7 +47,7 @@
 .log-text {
   margin: 20rpx;
   font-size: 30rpx; 
-  color: #757575;
+  color: #37383b;
   text-align: left;
   
 

@@ -15,7 +15,7 @@
   font-weight: normal;
   font-size: 30rpx;
   line-height: 40rpx;
-  color: #757575;
+  color: #37383b;
   margin-top: 5rpx;
  
 }

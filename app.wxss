@@ -21,7 +21,7 @@
   font-weight: normal;
     font-size: 30rpx;  
     line-height: 40rpx;
-    color: #757575;
+    color: #37383b;
     border-bottom: 2rpx solid #ededed;
     margin-bottom:48rpx;
 }
@@ -64,7 +64,7 @@
 }
 
 .no-more {
-  color: #757575;
+  color: #37383b;
   font-size: 30rpx;
   line-height: 1.8rem;
   margin-bottom: 15rpx;
@@ -155,7 +155,7 @@
   font-weight: normal;
   font-size: 30rpx;
   line-height: 40rpx;
-  color: #757575;
+  color: #37383b;
   margin-top: 100rpx;
 }
 
