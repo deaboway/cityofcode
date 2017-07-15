@@ -58,7 +58,7 @@ module.exports = {
   },
   //获取分类列表
   getCategories: function () {
-    var url = HOST_URI + 'categories?per_page=100&orderby=name&order=asc';
+    var url = HOST_URI + 'categories?per_page=100&orderby=name&order=asc&hide_empty=true';
     return url;
   },
   //获取某个分类信息

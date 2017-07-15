@@ -21,7 +21,7 @@ Page({
   },
   onLoad:function(options){
     wx.setNavigationBarTitle({
-      title: '代码之城-专题',
+      title: '代码之城',
       success: function (res) {
         // success
       }
@@ -49,7 +49,11 @@ Page({
 
           floatDisplay:"block",
 
-          categoriesList: self.data.categoriesList.concat(response.data.map(function (item) {
+          categoriesList: self.data.categoriesList.concat(response.data.map(function (item,index) {
+            // if(item.count==0) {
+            //   console.log(item.name);
+            //   console.log(index);
+            // }
             if (typeof (item.description) == "undefined" || item.description == "") 
             {
               item.description ="../../images/website.png";

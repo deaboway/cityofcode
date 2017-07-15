@@ -32,7 +32,7 @@
   color: #37383b;
 }
 .userinfo-nickname {
-  color: #aaa;
+  color: #37383b;
 }
 
 .log-list {
