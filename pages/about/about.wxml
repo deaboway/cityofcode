@@ -1,34 +1,25 @@
-<import src="../../templates/header.wxml" />
+<!--
+/*
+ * 
+ * WordPres版微信小程序
+ * author: jianbo
+ * organization: 守望轩  www.watch-life.net
+ * github:    https://github.com/iamxjb/winxin-app-watch-life.net
+ * 技术支持微信号：iamxjb
+ * 开源协议：MIT
+ * Copyright (c) 2017 https://www.watch-life.net All rights reserved.
+ *
+ */-->
+<import src="../../wxParse/wxParse.wxml"/>
+<import src="../../templates/header.wxml"/>
 <view class="container">
-  <template is="tempHeader" />
-  <view class="about-article ">
-    <view class="about-title">
-      关于“代码之城”
-    </view>
-    
-
-    <view class="about-desc">
-    - “代码之城”小程序文章来源于deaboway的个人网站，并与“代码之城”微信公众号绑定。
-    </view>
-
-
-    <view class="about-desc">
-    - “代码之城”微信公众号:
-    </view>
-    <view class="about-summary">
-      <image src="../../images/qrcode_wechat.jpg" style="height:80vw;width:80vw"></image>
-    </view>
-
-
-    <view class="about-desc">
-    - deaboway的个人网站:
-    </view>
-    <view class="about-summary">
-      <image src="../../images/qrcode-web.jpg" style="height:41vw;width:80vw"></image>
-    </view>
-
-    <view class="about-thx">
-    本程序采用基于MIT开源协议的“守望轩”，感谢Jianbo
-    </view>
-  </view>
+  <template is="tempHeader" /> 
+<view class="h2">关于“代码之城”</view>
+  <view class="wrapper">
+      <view class="excerpt"> 
+     
+    <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+      
+      </view> 
+      </view>
 </view>
