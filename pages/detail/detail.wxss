@@ -263,15 +263,14 @@
 
 .ditail-copyright
 {
-
   font-size: 26rpx;
   line-height: 1.2;
   font-weight: normal;
   text-align: center;
   color:  #999;
   margin-top: 20rpx;
-  margin-bottom: 50rpx
-
+  margin-bottom: 50rpx;
+  padding-bottom: 100rpx;
 }
 
 

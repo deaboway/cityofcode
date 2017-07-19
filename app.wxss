@@ -13,7 +13,6 @@
     padding: 0 25rpx; 
     background-color: #fff;
     font-family:Microsoft YaHei,Helvetica, Arial, sans-serif;
-    
 } 
 .header {
   padding: 50rpx 0; 
@@ -173,6 +172,6 @@
   text-align: center;
   color:  #999;
   margin-top: 20rpx;
-  margin-bottom: 50rpx
-
+  margin-bottom: 50rpx;
+  padding-bottom: 50rpx;
 }
