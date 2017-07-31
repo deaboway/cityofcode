@@ -19,7 +19,8 @@ Page({
   data: {
     title: '文章内容',
     detail: {},
-    commentsList:{},
+    commentsList:[],
+    ChildrenCommentsList: [],
     commentCount:'',
     detailDate:'',
     commentValue:'',
@@ -29,9 +30,15 @@ Page({
     page: 1,
     isLastPage:false,
 
+    parentID:"0",
+    focus:false,    
+    placeholder:"输入评论",
+
     postID:null,
     scrollHeight: 0,
     link:'',
+
+
 
     isGetUserInfo:false,
     dialog: {
@@ -108,8 +115,7 @@ Page({
             commentCount: "有" + response.data.total_comments + "条评论"
           });
          
-        }
-        
+        }        
         self.setData({
           detail: response.data,
           postID: id,
@@ -146,27 +152,32 @@ Page({
         wx.setStorageSync('readLogs', logs);
         //end 
 
-
-        self.fetchCommentData(self.data);       
+        self.fetchCommentData(self.data,'0');       
       }
     });
   },
   //获取评论
-  fetchCommentData: function (data) {
-    var self = this;
+  fetchCommentData: function (data,flag) {
+    var self = this; 
 
+
+    wx.showLoading({
+      title: '正在加载',
+      mask: true
+    }) 
+    
     if (!data) data = {};
     if (!data.page) data.page = 1;
 
-    if (data.page === 1) {
-      self.setData({
-        commentsList: []
-      });
-    };
+    self.setData({
+      commentsList: [],
+      ChildrenCommentsList: []
+    });
+
     wx.request({
       url: Api.getComments(data),
       success: function (response) {
-        if (response.data.length < 6) {
+        if (response.data.length < 100) {
           self.setData({
             isLastPage: true
           });
@@ -175,48 +186,92 @@ Page({
 
         if (response.data) {
 
-        
+       
         self.setData({
           //commentsList: response.data, 
           commentsList: self.data.commentsList.concat(response.data.map(function (item) {
             var strSummary = util.removeHTML(item.content.rendered);
             var strdate = item.date
             item.summary = strSummary;
+           
             item.date = util.formatDateTime(strdate);
              if (item.author_url.indexOf('wx.qlogo.cn') !=-1 )
             {
               if (item.author_url.indexOf('https') ==-1 )
               {
                 item.author_url = item.author_url.replace("http", "https");
-              }
-
-              
+              }             
             }
             else
             {
-               item.author_url ="../../images/gravatar.png";
+              item.author_url ="../../images/gravatar.png";
             }
-            
-            return item;
-           
-          }))
-          
+            return item;           
+          }))         
           
         });
-
       }
-
-
-        wx.showToast({
-          title: '加载中',
-          icon: 'loading',
-          mask: true,
-          duration: 1000         
-
-        })
+        if (data.page === 1){
+          self.fetchChildrenCommentData(data, flag);
+      }
         
       }
     });
+  },
+
+  //获取回复
+  fetchChildrenCommentData: function (data,flag) {
+  var self = this;
+    wx.request({
+      url: Api.getChildrenComments(data),
+      success: function (response) {
+
+        if (response.data)
+        {         
+          self.setData({
+            ChildrenCommentsList: self.data.ChildrenCommentsList.concat(response.data.map(function (item) {
+              var strSummary = util.removeHTML(item.content.rendered);
+              var strdate = item.date
+              item.summary = strSummary;
+
+              item.date = util.formatDateTime(strdate);
+              if (item.author_url.indexOf('wx.qlogo.cn') != -1) {
+                if (item.author_url.indexOf('https') == -1) {
+                  item.author_url = item.author_url.replace("http", "https");
+                }
+
+
+              }
+              else {
+                item.author_url = "../../images/gravatar.png";
+              }
+              return item;
+
+            }))
+
+          });
+
+        } 
+
+        setTimeout(function () {
+          wx.hideLoading();
+          if(flag=='1')
+          {
+            wx.showToast({
+              title: '评论发布成功。',
+              icon: 'success',
+              duration: 900,
+              success: function () {
+
+              }
+            })
+          }
+        }, 900);
+      }
+    });
+
+
+  
   },
   //底部刷新
   loadMore: function (e) {
@@ -227,7 +282,7 @@ Page({
         page: self.data.page + 1
       });
       console.log('当前页' + self.data.page);
-      this.fetchCommentData(self.data);
+      this.fetchCommentData(self.data,'0');
     }
     else {
       wx.showToast({
@@ -237,6 +292,17 @@ Page({
       });
     }
   },
+  replay:function(e)
+  {
+    var self = this;
+    var id = e.target.dataset.id;
+    var name = e.target.dataset.name;
+    self.setData({
+      parentID: id,
+      content: "@"+name+":",
+      focus:true
+    });  
+  },
   //提交评论
   formSubmit: function (e) { 
     var self = this;   
@@ -244,8 +310,25 @@ Page({
     var email = "wechat@restapi.com";
     var comment = e.detail.value.inputComment;
     var author_url =  self.data.userInfo.avatarUrl;
-    
-    var postID = e.detail.value.inputPostID;
+    var parent  = self.data.parentID;    
+    var postID = e.detail.value.inputPostID;    
+    if (comment.indexOf('@') == -1 && comment.indexOf(':')==-1)
+    {
+        parent=0;
+    }
+    else{ 
+        var temp = comment.split(":");
+        if (temp.length == 2 && temp[temp.length - 1].length !=0)
+        {  
+             comment = temp[temp.length - 1];           
+             
+        }
+        else
+        {
+            comment="";
+        }
+
+    }   
     if (comment.length===0 )
     {
       self.setData({
@@ -259,13 +342,10 @@ Page({
     else
     {
       //检测授权
-      self.checkSettingStatu();
-      
+      self.checkSettingStatu();      
       if (self.data.isGetUserInfo)
       {
-
-
-        wx.request({
+          wx.request({
           url: Api.postComment(),
           method: 'post',
           data: {
@@ -273,7 +353,8 @@ Page({
             author_name: name,
             author_email: email,
             content: comment,
-            author_url: author_url
+            author_url: author_url,
+            parent: parent
           },
           header: {
             'content-type': 'application/json'
@@ -281,18 +362,22 @@ Page({
           success: function (res) {
             //console.log(res.data)
             if (res.statusCode == 201) {
+              // self.setData({                
+              //   content: '',
+              //   parent:"0",
+              //   placeholder:"输入评论",
+              //   focus:false,
+              //   commentsList: [],
+              //   ChildrenCommentsList: []
+
+              // }); 
+              // self.fetchCommentData(self.data,'1'); // gavin 后台审核，因此不需要刷新去取数据啦！
               self.setData({
                 'dialog.hidden': false,
                 'dialog.title': '提示',
                 'dialog.content': '评论已经提交，等待系统管理员审核后显示。',
-                content: ''
-
+                
               });
-
-             
-
-              // self.fetchCommentData(self.data); // gavin 后台审核，因此不需要刷新去取数据啦！
-
             }
             else {
 
@@ -320,9 +405,7 @@ Page({
 
                 });
               }
-
             }
-
           },
           fail: function (res) {
             //console.log(res.data) 

@@ -189,7 +189,8 @@ Page({
               }
 
               if (item.post_thumbnail_image == null || item.post_thumbnail_image == '') {
-                item.post_thumbnail_image = '../../images/deaboway-logo-132.jpg';
+                // item.post_thumbnail_image = '../../images/deaboway-logo-132.jpg';
+                item.post_thumbnail_image = Api.getContentFirstImage(item.content.rendered);
               }
               item.date = util.cutstr(strdate, 10, 1);
               return item;
