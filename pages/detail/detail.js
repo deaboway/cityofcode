@@ -362,22 +362,19 @@ Page({
           success: function (res) {
             //console.log(res.data)
             if (res.statusCode == 201) {
-              // self.setData({                
-              //   content: '',
-              //   parent:"0",
-              //   placeholder:"输入评论",
-              //   focus:false,
-              //   commentsList: [],
-              //   ChildrenCommentsList: []
-
-              // }); 
-              // self.fetchCommentData(self.data,'1'); // gavin 后台审核，因此不需要刷新去取数据啦！
               self.setData({
                 'dialog.hidden': false,
                 'dialog.title': '提示',
                 'dialog.content': '评论已经提交，等待系统管理员审核后显示。',
-                
-              });
+                content: '',
+                parent:"0",
+                placeholder:"输入评论",
+                focus:false,
+                // commentsList: [],
+                // ChildrenCommentsList: []
+
+              }); 
+              // self.fetchCommentData(self.data,'1'); // gavin 后台审核，因此不需要刷新去取数据啦！
             }
             else {
 
