@@ -12,10 +12,10 @@
 
 <template name="tempHeader">
   <view class="header">
-    <image src="../../images/qrcode-web.jpg" style="height:205rpx;width:400rpx"></image>
-    <!--<view>
-      no Pain no Gain no Gavin
-    </view>-->
+    <image src="../../images/logo.gif" style="height:120rpx;width:400rpx"></image>
+    <view>
+      软件最大的好处，就是让一切变得简单。
+    </view>
   </view>
 </template>
 <!-- header end -->

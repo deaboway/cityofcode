@@ -11,6 +11,10 @@
  */
 var Api = require('../../utils/api.js');
 var util = require('../../utils/util.js');
+var wxApi = require('../../utils/wxApi.js')
+var wxRequest = require('../../utils/wxRequest.js')
+
+
 
 
 Page({
@@ -21,7 +25,7 @@ Page({
   },
   onLoad:function(options){
     wx.setNavigationBarTitle({
-      title: '代码之城',
+      title: '代码之城-专题',
       success: function (res) {
         // success
       }

@@ -9,27 +9,49 @@
  * Copyright (c) 2017 https://www.watch-life.net All rights reserved.
  */
 
-var HOST_URI = 'https://www.deaboway.com/wp-json/wp/v2/';
 
+import config from 'config.js'
 
-module.exports = {
+var domain = config.getDomain;
+var HOST_URI = 'https://' + domain+'/wp-json/wp/v2/';
+var HOST_URI_WATCH_LIFE_JSON = 'https://' + domain + '/wp-json/cityofcode/v1/';
+   
+module.exports = {  
   // 获取文章列表数据
   getPosts: function (obj) {
-    var url = HOST_URI + 'posts?per_page=6&page=' + obj.page;
+      var url = HOST_URI + 'posts?per_page=6&orderby=date&order=desc&page=' + obj.page;
     
     if (obj.categories != 0) {
       url += '&categories=' + obj.categories;
     }
-    if (obj.search != '') {
+    else if (obj.search != '') {
       url += '&search=' + encodeURIComponent(obj.search);
-    }   
+    }     
     return url;
 
   },
 
+// 获取置顶的文章
   getStickyPosts: function () {
     var url = HOST_URI + 'posts?sticky=true&per_page=5&page=1';
     return url;
+
+  },
+ 
+  
+  //获取首页滑动文章
+  getSwiperPosts: function () {
+      var url = HOST_URI_WATCH_LIFE_JSON;
+      url +='post/swipe';
+      return url;
+  },
+
+
+  // 获取tag相关的文章列表
+  getPostsByTags: function (id,tags) {
+      var url = HOST_URI + 'posts?per_page=5&&page=1&exclude=' + id + "&tags=" + tags;
+
+      return url;
 
   },
 
@@ -41,8 +63,15 @@ module.exports = {
     return url;
 
   },
+  // 获取特定slug的文章内容
+  getPostBySlug: function (obj) {
+      var url = HOST_URI + 'posts?slug=' + obj;
+
+      return url;
+
+  },
   // 获取内容页数据
-  getPostByID: function (id, obj) {
+  getPostByID: function (id) {
     
     return HOST_URI + 'posts/' + id;
   },
@@ -78,17 +107,27 @@ module.exports = {
   },
 
 
-  //获取最近的50个评论
+  //获取最近的30个评论
   getRecentfiftyComments:function(){
     return HOST_URI + 'comments?per_page=30&orderby=date&order=desc'
   },
 
-  //获取最近的50个评论
+  //提交评论
   postComment: function () {
     return HOST_URI + 'comments'
-  },
+  }, 
 
-   
+  //提交微信评论
+  postWeixinComment: function () {
+    var url = HOST_URI_WATCH_LIFE_JSON;
+    return url + 'comment/add'
+  }, 
+
+  //获取微信评论
+  getWeixinComment: function (openid) {
+      var url = HOST_URI_WATCH_LIFE_JSON;
+      return url + 'comment/get?openid=' + openid;
+  },    
 
   //获取文章的第一个图片地址,如果没有给出默认图片
   getContentFirstImage: function (content){
@@ -99,6 +138,95 @@ module.exports = {
       src=arrReg[1];
     }
     return src;  
+  },
+
+ //获取热点文章
+  getTopHotPosts(flag){      
+      var url = HOST_URI_WATCH_LIFE_JSON;
+      if(flag ==1)
+      {
+          url +="post/hotpostthisyear"
+      }
+      else if(flag==2)
+      {
+          url += "post/pageviewsthisyear"
+      }
+      else if (flag == 3) {
+          url += "post/likethisyear"
+      }
+      else if (flag == 4) {
+          url += "post/praisethisyear"
+      }
+
+      return url;
+  },
+
+  //更新文章浏览数
+  updatePageviews(id) {
+      var url = HOST_URI_WATCH_LIFE_JSON;
+      url += "post/addpageview/"+id;
+      return url;
+  },
+  //获取用户openid
+  getOpenidUrl(id) {
+    var url = HOST_URI_WATCH_LIFE_JSON;
+    url += "weixin/getopenid";
+    return url;
+  },
+
+  //点赞
+  postLikeUrl() {
+    var url = HOST_URI_WATCH_LIFE_JSON;
+    url += "post/like";
+    return url;
+  },
+
+  //判断当前用户是否点赞
+  postIsLikeUrl() {
+    var url = HOST_URI_WATCH_LIFE_JSON;
+    url += "post/islike";
+    return url;
+  },
+
+  //获取我的点赞
+  getMyLikeUrl(openid) {
+      var url = HOST_URI_WATCH_LIFE_JSON;
+      url += "post/mylike?openid=" + openid;
+      return url;
+  },
+
+  //赞赏,获取支付密钥
+  postPraiseUrl() {   
+    var url = 'https://' + domain  + "/wp-wxpay/pay/app.php";
+    return url;
+  },
+
+  //更新赞赏数据
+  updatePraiseUrl() {
+    var url = HOST_URI_WATCH_LIFE_JSON;
+    url += "post/praise";
+    return url;
+  },
+
+  //获取我的赞赏数据
+  getMyPraiseUrl(openid) {
+      var url = HOST_URI_WATCH_LIFE_JSON;
+      url += "post/mypraise?openid=" + openid;
+      return url;
+  },
+
+  //获取所有的赞赏数据
+  getAllPraiseUrl() {
+      var url = HOST_URI_WATCH_LIFE_JSON;
+      url += "post/allpraise";
+      return url;
+  },
+
+  //发送模版消息
+  sendMessagesUrl() {
+      var url = HOST_URI_WATCH_LIFE_JSON;
+      url += "weixin/sendmessage";
+      return url;
   }
 
 };

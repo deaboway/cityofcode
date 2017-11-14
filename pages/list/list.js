@@ -13,7 +13,8 @@
 var Api = require('../../utils/api.js');
 var util = require('../../utils/util.js');
 var WxParse = require('../../wxParse/wxParse.js');
-var app = getApp()
+var wxApi = require('../../utils/wxApi.js')
+var wxRequest = require('../../utils/wxRequest.js')
 
 Page({
   data: {
@@ -25,14 +26,10 @@ Page({
     isLastPage: false,
     page: 1,
     search: '',
-    categories: 0, 
-
+    categories: 0,
     categoriesName:'',
-
     categoriesImage:"", 
-
     showerror:"none",
-
     isCategoryPage:"none",
     isSearchPage:"none",
     showallDisplay: "block",
@@ -54,7 +51,7 @@ Page({
     var title = "分享“代码之城”";
     var path =""
 
-    if (this.data.categories && this.data.categories != 0 != 0)
+    if (this.data.categories && this.data.categories != 0)
   {
       title += "的专题：" + this.data.categoriesList.name;
       path = 'pages/list/list?categoryID=' + this.data.categoriesList.id;
@@ -134,7 +131,7 @@ Page({
     }
     if (options.search && options.search != '') {
       wx.setNavigationBarTitle({
-        title: "搜索关键字:"+options.search,
+        title: "搜索关键字："+options.search,
         success: function (res) {
           // success
         }
@@ -165,89 +162,91 @@ Page({
       title: '正在加载',
       mask:true
     });
-    wx.request({
-      url: Api.getPosts(data),
-      success: function (response) {
+
+    var getPostsRequest = wxRequest.getRequest(Api.getPosts(data));
+
+    getPostsRequest.then(response =>{
+
         if (response.statusCode === 200) {
-          if (response.data.length < 6) {
+            if (response.data.length < 6) {
+                self.setData({
+                    isLastPage: true
+                });
+            };
             self.setData({
-              isLastPage: true
+                floatDisplay: "block",
+                showallDisplay: "block",
+                postsList: self.data.postsList.concat(response.data.map(function (item) {
+                    var strdate = item.date
+                    if (item.category_name != null) {
+
+                        item.categoryImage = "../../images/topic.png";
+                    }
+                    else {
+                        item.categoryImage = "";
+                    }
+
+                    if (item.post_thumbnail_image == null || item.post_thumbnail_image == '') {
+                        // item.post_thumbnail_image = '../../images/deaboway-logo-132.jpg';
+                        item.post_thumbnail_image = Api.getContentFirstImage(item.content.rendered);
+                    }
+                    item.date = util.cutstr(strdate, 10, 1);
+                    return item;
+                })),
+
             });
-          };                 
-          self.setData({        
+            // setTimeout(function () {
+            //     wx.hideLoading();
 
-            floatDisplay: "block",
-            showallDisplay: "block",
-            postsList: self.data.postsList.concat(response.data.map(function (item) {
-              var strdate = item.date
-              if (item.category_name != null) {
+            // }, 1500);
 
-                item.categoryImage = "../../images/topic.png";
-              }
-              else {
-                item.categoryImage = "";
-              }
 
-              if (item.post_thumbnail_image == null || item.post_thumbnail_image == '') {
-                // item.post_thumbnail_image = '../../images/deaboway-logo-132.jpg';
-                item.post_thumbnail_image = Api.getContentFirstImage(item.content.rendered);
-              }
-              item.date = util.cutstr(strdate, 10, 1);
-              return item;
-            })),
-
-          });
-          setTimeout(function () {
-            wx.hideLoading();
-           
-          }, 1500);
-
-        
-
-        }
-        else
-        {
-          if (response.data.code == "rest_post_invalid_page_number") {
-
-            self.setData({
-              isLastPage: true
-            });
-            
-          }
-          else {
-            wx.showToast({
-              title: response.data.message,
-              duration: 1500
-            })
-          }
-        }       
-
-      } ,
-
-      fail: function (res) {
-        wx.hideLoading();
-        if (data.page == 1) {
-
-          self.setData({
-            showerror: "block",
-            floatDisplay: "none"
-          });
 
         }
         else {
-          wx.showModal({
-            title: '加载失败',
-            content: '加载数据失败,请重试.',
-            showCancel: false,
-          });
+            if (response.data.code == "rest_post_invalid_page_number") {
 
+                self.setData({
+                    isLastPage: true
+                });
 
-          self.setData({
-            page: data.page - 1
-          });
+            }
+            else {
+                wx.showToast({
+                    title: response.data.message,
+                    duration: 1500
+                })
+            }
+        }   
+
+    })
+    .catch(function(){        
+        if (data.page == 1) {
+
+            self.setData({
+                showerror: "block",
+                floatDisplay: "none"
+            });
+
         }
-      }
-    });
+        else {
+            wx.showModal({
+                title: '加载失败',
+                content: '加载数据失败,请重试.',
+                showCancel: false,
+            });
+
+
+            self.setData({
+                page: data.page - 1
+            });
+        }
+
+    })
+        .finally(function () {
+            wx.hideLoading();
+
+        })  
   },  
 
 
@@ -269,41 +268,41 @@ Page({
       categoriesList: []
     });
 
-    wx.request({
-      url: Api.getCategoryByID(id),
-      success: function (response) {
-        var catImage="";
-        if (typeof (response.data.description) == "undefined" || response.data.description == "")
-        {
-          catImage = "../../images/website.png";
-        }
-        else
-        {
-          var desc = response.data.description;
-          if (desc.indexOf("http") > 0 && desc.indexOf(".jpg") > 0) {
-            catImage = desc.substring(desc.indexOf("http"), desc.indexOf(".jpg")+4);
-          } else {
+    var getCategoryRequest = wxRequest.getRequest(Api.getCategoryByID(id));
+
+    getCategoryRequest.then(response =>{
+
+        var catImage = "";
+        // if (typeof (response.data.category_thumbnail_image) == "undefined" || response.data.category_thumbnail_image == "") {
+        if (typeof (response.data.description) == "undefined" || response.data.description == "") {
             catImage = "../../images/website.png";
-          }
+        }
+        else {
+            // catImage = response.data.category_thumbnail_image;
+            var desc = response.data.description;
+            if (desc.indexOf("http") > 0 && desc.indexOf(".jpg") > 0) {
+              catImage = desc.substring(desc.indexOf("http"), desc.indexOf(".jpg") + 4);
+            } else {
+              catImage = "../../images/website.png";
+            }
         }
 
         self.setData({
-          categoriesList: response.data,
-          categoriesImage: catImage,
-          categoriesName: response.name
+            categoriesList: response.data,
+            categoriesImage: catImage,
+            categoriesName: response.name
         });
 
         wx.setNavigationBarTitle({
-          title: response.data.name,
-          success: function (res) {
-            // success
-          }
+            title: response.data.name,
+            success: function (res) {
+                // success
+            }
         });
 
-        self.fetchPostsData(self.data);        
+        self.fetchPostsData(self.data); 
 
-      }
-    });
+    })
   },
 
 })

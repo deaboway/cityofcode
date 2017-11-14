@@ -155,12 +155,28 @@ function CheckImgExists(imgurl) {
   }
 }
 
-function GetPageName(imagpath) {
-  var tmp = new Array();
-  tmp = imagpath.split("/");
-  return tmp[tmp.length - 1];
+function GetUrlFileName(url,domain) {    
+    var filename = url.substring(url.lastIndexOf("/") + 1);
+    if (filename == domain || filename =='')
+    {
+        filename="index";
+    }
+    else
+    {
+        filename = filename.substring(0, filename.lastIndexOf("."));
+    }
+    
+    return filename;
 }
 
+
+function json2Form(json) {
+    var str = [];
+    for (var p in json) {
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(json[p]));
+    }
+    return str.join("&");
+}
 
 module.exports = {
   formatTime: formatTime,
@@ -172,6 +188,7 @@ module.exports = {
   checkImgType: checkImgType,
   isEmptyObject: isEmptyObject,
   CheckImgExists: CheckImgExists,
-  GetPageName: GetPageName
+  GetUrlFileName: GetUrlFileName,
+  json2Form: json2Form
   
 }
