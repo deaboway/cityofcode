@@ -26,8 +26,8 @@ module.exports = {
         }).
             //获取用户信息
             then(response => {
-                console.log(response.userInfo);
-                console.log("成功获取用户信息(公开信息)");
+                // console.log(response.userInfo);
+                // console.log("成功获取用户信息(公开信息)");
                 app.globalData.userInfo = response.userInfo;
                 app.globalData.isGetUserInfo = true;
                 var url = Api.getOpenidUrl();
@@ -42,13 +42,13 @@ module.exports = {
                 postOpenidRequest.then(response => {
                     if (response.data.status == '200') {
                         //console.log(response.data.openid)
-                        console.log("openid 获取成功");
+                        // console.log("openid 获取成功");
                         app.globalData.openid = response.data.openid;
                         app.globalData.isGetOpenid = true;
 
                     }
                     else {
-                        console.log(response.data.message);
+                        // console.log(response.data.message);
                     }
                 })
                 
@@ -56,7 +56,7 @@ module.exports = {
                 //     self.getIslike();
                 // })
             }).catch(function (error) {
-                console.log('error: ' + error.errMsg);
+                // console.log('error: ' + error.errMsg);
             })
     }
 }

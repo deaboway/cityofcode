@@ -80,16 +80,16 @@ Page({
     },
     onShareAppMessage: function (res) {
       this.ShowHideMenu();
-      console.log(res);
+      // console.log(res);
         return {
           title: '分享"' + config.getWebsiteName +'"的文章：' + this.data.detail.title.rendered,
             path: 'pages/detail/detail?id=' + this.data.detail.id,
             success: function (res) {
                 // 转发成功
-                console.log(res);
+                // console.log(res);
             },
             fail: function (res) {
-                console.log(res);
+                // console.log(res);
                 // 转发失败
             }
 
@@ -161,7 +161,7 @@ Page({
             }
             else if (response.data.status == '501')
             {
-              console.log(response.data.message);
+              // console.log(response.data.message);
               wx.showToast({
                 title: '谢谢，已赞过',
                 icon: 'success',
@@ -171,7 +171,7 @@ Page({
               })
             }
             else{
-              console.log(response.data.message);
+              // console.log(response.data.message);
 
             }
             self.setData({
@@ -200,7 +200,7 @@ Page({
                 likeImag: "like-on.png"
               });
 
-              console.log("已赞过");
+              // console.log("已赞过");
             }
 
           })
@@ -313,7 +313,7 @@ Page({
                 var updatePageviewsRequest = wxRequest.getRequest(Api.updatePageviews(id));
                 updatePageviewsRequest
                     .then(result => {
-                        console.log(result.data.message);                       
+                        // console.log(result.data.message);                       
 
                     })
                 
@@ -343,7 +343,7 @@ Page({
     wxParseTagATap: function (e) {
         var self = this;
         var href = e.currentTarget.dataset.src;
-        console.log(href);
+        // console.log(href);
         var domain = config.getDomain;
         //可以在这里进行一些路由处理
         if (href.indexOf(domain) == -1) {
@@ -524,7 +524,7 @@ Page({
             self.setData({
                 page: self.data.page + 1
             });
-            console.log('当前页' + self.data.page);
+            // console.log('当前页' + self.data.page);
             this.fetchCommentData(self.data, '0');
         }
         else {
@@ -623,7 +623,7 @@ Page({
                     });
                   }
                   else {
-                    console.log(res.data.code)
+                    // console.log(res.data.code)
                     self.setData({
                       'dialog.hidden': false,
                       'dialog.title': '提示',
@@ -649,12 +649,12 @@ Page({
         // 判断是否是第一次授权，非第一次授权且授权失败则进行提醒
         wx.getSetting({
             success: function success(res) {
-                console.log(res.authSetting);
+                // console.log(res.authSetting);
                 var authSetting = res.authSetting;
                 if (util.isEmptyObject(authSetting)) {
-                    console.log('第一次授权');
+                    // console.log('第一次授权');
                 } else {
-                    console.log('不是第一次授权', authSetting);
+                    // console.log('不是第一次授权', authSetting);
                     // 没有授权的提醒
                     if (authSetting['scope.userInfo'] === false) {
                         wx.showModal({
@@ -666,10 +666,10 @@ Page({
                             confirmText: '设置权限',
                             success: function (res) {
                                 if (res.confirm) {
-                                    console.log('用户点击确定')
+                                    // console.log('用户点击确定')
                                     wx.openSetting({
                                         success: function success(res) {
-                                            console.log('打开设置', res.authSetting);
+                                            // console.log('打开设置', res.authSetting);
                                             var scopeUserInfo = res.authSetting["scope.userInfo"];
                                             if (scopeUserInfo) {
                                                 auth.getUsreInfo();

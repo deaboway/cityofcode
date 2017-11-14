@@ -135,7 +135,7 @@ Page({
 
         })
         .catch(function (response){
-            console.log(response); 
+            // console.log(response); 
             self.setData({
                 showerror: "block",
                 floatDisplay: "none"

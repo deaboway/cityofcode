@@ -29,8 +29,8 @@ Page({
    */
   onLoad: function (options) {
       var self= this;
-      console.log(options.url);
-      console.log(decodeURIComponent(options.url));
+      // console.log(options.url);
+      // console.log(decodeURIComponent(options.url));
       var url = decodeURIComponent(options.url);
       
       if (options.url !=null)
@@ -44,7 +44,7 @@ Page({
   },
   onShareAppMessage :function (res){
         var self =this;
-        console.log(res.target);
+        // console.log(res.target);
         return {
             title: '分享"' + config.getWebsiteName + '"的文章',
             path: self.data.url,

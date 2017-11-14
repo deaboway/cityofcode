@@ -92,7 +92,7 @@ Page({
   wxParseTagATap: function (e) {
       var self = this;
       var href = e.currentTarget.dataset.src;
-      console.log(href);
+      // console.log(href);
       var domain = config.getDomain;
       //我们可以在这里进行一些路由处理
       if (href.indexOf(domain) == -1) {
@@ -152,12 +152,12 @@ Page({
       // 判断是否是第一次授权，非第一次授权且授权失败则进行提醒
       wx.getSetting({
           success: function success(res) {
-              console.log(res.authSetting);
+              // console.log(res.authSetting);
               var authSetting = res.authSetting;
               if (util.isEmptyObject(authSetting)) {
-                  console.log('第一次授权');
+                  // console.log('第一次授权');
               } else {
-                  console.log('不是第一次授权', authSetting);
+                  // console.log('不是第一次授权', authSetting);
                   // 没有授权的提醒
                   if (authSetting['scope.userInfo'] === false) {
                       wx.showModal({
@@ -169,10 +169,10 @@ Page({
                           confirmText: '设置权限',
                           success: function (res) {
                               if (res.confirm) {
-                                  console.log('用户点击确定')
+                                  // console.log('用户点击确定')
                                   wx.openSetting({
                                       success: function success(res) {
-                                          console.log('打开设置', res.authSetting);
+                                          // console.log('打开设置', res.authSetting);
                                           var scopeUserInfo = res.authSetting["scope.userInfo"];
                                           if (scopeUserInfo) {
                                               auth.getUsreInfo();
@@ -191,7 +191,7 @@ Page({
     var self = this; 
     var getPageRequest = wxRequest.getRequest(Api.getPageByID(id));
     getPageRequest.then(response =>{
-        console.log(response);
+        // console.log(response);
         self.setData({
             pageData: response.data,
             // wxParseData: WxParse('md',response.data.content.rendered)
@@ -224,7 +224,7 @@ Page({
 
             }
             else {
-                console.log(response);
+                // console.log(response);
             }
 
 

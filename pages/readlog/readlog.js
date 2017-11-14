@@ -47,7 +47,7 @@ Page({
         self.setData({
           userInfo: userInfo
         })
-        console.log("get");
+        // console.log("get");
       });
         auth.getUsreInfo();
     }
@@ -164,7 +164,7 @@ Page({
                   }
                   else
                   {
-                      console.log(response);
+                      // console.log(response);
                       self.setData({
                           showerror: 'block' 
                       });
@@ -205,7 +205,7 @@ Page({
                       } 
                   }
                   else {
-                      console.log(response);
+                      // console.log(response);
                       this.setData({
                           showerror: 'block'
                       });
@@ -243,7 +243,7 @@ Page({
                     } 
                 }
                 else {
-                    console.log(response);
+                    // console.log(response);
                     this.setData({
                         showerror: 'block'
                     });
@@ -265,12 +265,12 @@ Page({
       // 判断是否是第一次授权，非第一次授权且授权失败则进行提醒
       wx.getSetting({
           success: function success(res) {
-              console.log(res.authSetting);
+              // console.log(res.authSetting);
               var authSetting = res.authSetting;
               if (util.isEmptyObject(authSetting)) {
-                  console.log('第一次授权');
+                  // console.log('第一次授权');
               } else {
-                  console.log('不是第一次授权', authSetting);
+                  // console.log('不是第一次授权', authSetting);
                   // 没有授权的提醒
                   if (authSetting['scope.userInfo'] === false) {
                       wx.showModal({
@@ -282,10 +282,10 @@ Page({
                           confirmText: '设置权限',
                           success: function (res) {
                               if (res.confirm) {
-                                  console.log('用户点击确定')
+                                  // console.log('用户点击确定')
                                   wx.openSetting({
                                       success: function success(res) {
-                                          console.log('打开设置', res.authSetting);
+                                          // console.log('打开设置', res.authSetting);
                                           var scopeUserInfo = res.authSetting["scope.userInfo"];
                                           if (scopeUserInfo) {
                                               auth.getUsreInfo();

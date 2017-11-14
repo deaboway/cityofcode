@@ -109,7 +109,7 @@ Page({
               var updatePraiseRequest = wxRequest.postRequest(url, data); //更新赞赏数据
               updatePraiseRequest
                 .then(response => {
-                  console.log(response.data.message);
+                  // console.log(response.data.message);
                 }).then(res => {
                   wx.showToast({
                     title: '谢谢赞赏！',
@@ -128,14 +128,14 @@ Page({
                         var sendMessageRequest = wxRequest.postRequest(url, data);
                         sendMessageRequest.then(response => {
                             if (response.data.status == '200') {
-                                console.log(response.data.message);
+                                // console.log(response.data.message);
                                 wx.navigateBack({
                                     delta: 1
                                 })
 
                             }
                             else {
-                                console.log(response.data.message);
+                                // console.log(response.data.message);
 
                             }
 
@@ -166,7 +166,7 @@ Page({
           });
         }
         else {
-          console.log(response.data.message);
+          // console.log(response.data.message);
 
         }
        })

@@ -34,7 +34,7 @@ Page({
     wx.request({
       url: Api.getPageByID(id, { mdrender: false }),
       success: function (response) {
-        console.log(response);
+        // console.log(response);
         self.setData({
           pageData: response.data,
           // wxParseData: WxParse('md',response.data.content.rendered)
