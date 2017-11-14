@@ -491,7 +491,7 @@ Page({
                     //wx.hideLoading();
                     if (flag == '1') {
                         wx.showToast({
-                            title: '评论发布成功。',
+                            title: '评论已发布',
                             icon: 'success',
                             duration: 900,
                             success: function () {
