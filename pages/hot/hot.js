@@ -126,7 +126,7 @@ Page({
                 postsList: self.data.postsList.concat(response.data.map(function (item) {
                     var strdate = item.post_date
                     if (item.post_thumbnail_image == null || item.post_thumbnail_image == '') {
-                      item.post_thumbnail_image = Api.getContentFirstImage(item.content.rendered);
+                      item.post_thumbnail_image = "../../images/deaboway-logo-132.jpg";
                     }
                     item.post_date = util.cutstr(strdate, 10, 1);
                     return item;
