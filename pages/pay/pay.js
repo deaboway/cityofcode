@@ -2,11 +2,11 @@
  * 
  * WordPres版微信小程序
  * author: jianbo
- * organization: 守望轩  www.watch-life.net
+ * organization: 代码之城  www.deaboway.com
  * github:    https://github.com/iamxjb/winxin-app-watch-life.net
  * 技术支持微信号：iamxjb
  * 开源协议：MIT
- *  *Copyright (c) 2017 https://www.watch-life.net All rights reserved.
+ *  *Copyright (c) 2017 https://www.deaboway.com All rights reserved.
  * 
  */
 
@@ -18,7 +18,11 @@ var wxApi = require('../../utils/wxApi.js');
 var wxRequest = require('../../utils/wxRequest.js');
 import config from '../../utils/config.js'
 
+var webSiteName= config.getWebsiteName;
+var domain =config.getDomain
+
 var app = getApp();
+var praiseWord="鼓励";
 Page({
   data: {    
     prices: [
@@ -26,14 +30,10 @@ Page({
     ],
     openid:'',
     postid:'',
-    total_fee:'',
-    template_id: config.getTemplateId,
-    flag: '1',
-    dialog: {
-      title: '',
-      content: '',
-      hidden: true
-    }
+    total_fee:'',   
+    flag:'1',
+    webSiteName:webSiteName,
+    domain:domain
   },
 
   /**
@@ -46,11 +46,13 @@ Page({
     var openid = options.openid;
     var postid = options.postid;
     var flag = options.flag;
+    praiseWord=options.praiseWord;
 
     that.setData({
       openid: openid,
       postid: postid,
-      flag:flag
+      flag:flag,
+      praiseWord:praiseWord
         });
 
   },
@@ -63,28 +65,20 @@ Page({
 
 
   /**
-   * 选中赞赏金额
+   * 选中鼓励金额
    */
   selectItem: function (event) {
-    this.setData({
-      'dialog.hidden': false,
-      'dialog.title': '提示',
-      'dialog.content': '代码之城暂不接受赞赏，喜欢的话帮忙转发安利呀！'
-    });
-    return;
-
-    var total_fee = event.currentTarget.dataset.item;
-    var money = total_fee ;
-    total_fee = total_fee*100;
+    var totalfee = event.currentTarget.dataset.item;
+    var money = totalfee ;
+    totalfee = totalfee;
     var that = this;    
     var url = Api.postPraiseUrl();
     var data = {
       openid: that.data.openid,
-      total_fee: total_fee
+      totalfee: totalfee
     }
-    var postLikeRequest = wxRequest.getRequest(url, data);
-    postLikeRequest
-      .then(response => {
+    var postPraiseRequest = wxRequest.postRequest(url, data);
+    postPraiseRequest.then(response => {
         if (response.data) {
           var temp = response.data;
           wx.requestPayment({
@@ -94,52 +88,50 @@ Page({
             'signType': 'MD5',
             'paySign': response.data.paySign,
             'success': function (res) {
-
               var url = Api.updatePraiseUrl();
-
               var data ={
-                openid: app.globalData.openid,
+                openid: that.data.openid,
                 postid: that.data.postid,
                 orderid: response.data.nonceStr,
-                money: total_fee
+                money: totalfee
               }
               var form_id = response.data.package;
-              form_id = form_id.substring(10);
-              
-              var updatePraiseRequest = wxRequest.postRequest(url, data); //更新赞赏数据
-              updatePraiseRequest
-                .then(response => {
-                  // console.log(response.data.message);
-                }).then(res => {
+              form_id = form_id.substring(10);              
+              var updatePraiseRequest = wxRequest.postRequest(url, data); //更新鼓励数据
+              updatePraiseRequest.then(response => {
+                  console.log(response.data.message);
+                })
+              .then(res => {
                   wx.showToast({
-                    title: '谢谢赞赏！',
-                    uration: 2000,
+                    title: '谢谢'+praiseWord+'！',
+                    duration: 2000,
                     success: function () {
                         data =
                             {
-                                openid: app.globalData.openid,
+                                openid: that.data.openid,
                                 postid: that.data.postid,
                                 template_id: that.data.template_id,
                                 form_id: form_id,
                                 total_fee: money,
-                                flag: that.data.flag
+                                flag: that.data.flag,
+                                fromUser: "None"
                             };
-                        url = Api.sendMessagesUrl();
-                        var sendMessageRequest = wxRequest.postRequest(url, data);
-                        sendMessageRequest.then(response => {
-                            if (response.data.status == '200') {
-                                // console.log(response.data.message);
-                                wx.navigateBack({
-                                    delta: 1
-                                })
+                        // url = Api.sendMessagesUrl();
+                        // var sendMessageRequest = wxRequest.postRequest(url, data);
+                        // sendMessageRequest.then(response => {
+                        //     if (response.data.status == '200') {
+                        //         console.log(response.data.message);
+                        //         wx.navigateBack({
+                        //             delta: 1
+                        //         })
 
-                            }
-                            else {
-                                // console.log(response.data.message);
+                        //     }
+                        //     else {
+                        //         console.log(response.data.message);
 
-                            }
+                        //     }
 
-                        });
+                        // });
 
                     }
                   });
@@ -157,7 +149,7 @@ Page({
               if (res.errMsg =='requestPayment:fail cancel')
               {
                 wx.showToast({
-                  title: '取消赞赏',
+                  title: '取消'+praiseWord,
                   icon: 'success'
                 });
               }
@@ -166,21 +158,11 @@ Page({
           });
         }
         else {
-          // console.log(response.data.message);
+          console.log(response.data.message);
 
         }
        })
 
     
-  },
-  confirm: function () {
-    this.setData({
-      'dialog.hidden': true,
-      'dialog.title': '',
-      'dialog.content': ''
-    })
-    wx.navigateBack({
-      delta: 1
-    })
-  } 
+  }
 })

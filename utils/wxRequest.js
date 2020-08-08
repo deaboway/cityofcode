@@ -2,11 +2,11 @@
  * 
  * WordPres版微信小程序
  * author: jianbo
- * organization: 守望轩  www.watch-life.net
+ * organization: 代码之城  www.deaboway.com
  * github:    https://github.com/iamxjb/winxin-app-watch-life.net
  * 技术支持微信号：iamxjb
  * 开源协议：MIT
- *  *Copyright (c) 2017 https://www.watch-life.net All rights reserved.
+ *  *Copyright (c) 2017 https://www.deaboway.com All rights reserved.
  * 
  */
 function wxPromisify(fn) {
@@ -14,11 +14,15 @@ function wxPromisify(fn) {
         return new Promise((resolve, reject) => {
             obj.success = function (res) {
                 //成功
+                wx.hideNavigationBarLoading()
                 resolve(res)
+                
             }
             obj.fail = function (res) {
                 //失败
                 reject(res)
+                wx.hideNavigationBarLoading()
+                console.log(res)
             }
             fn(obj)
         })
@@ -27,6 +31,7 @@ function wxPromisify(fn) {
 //无论promise对象最后状态如何都会执行
 Promise.prototype.finally = function (callback) {
     let P = this.constructor;
+    wx.hideNavigationBarLoading()
     return this.then(
         value => P.resolve(callback()).then(() => value),
         reason => P.resolve(callback()).then(() => { throw reason })
@@ -38,7 +43,8 @@ Promise.prototype.finally = function (callback) {
  * data 以对象的格式传入
  */
 function getRequest(url, data) {
-    var getRequest = wxPromisify(wx.request)
+    var getRequest = wxPromisify(wx.request);
+    wx.showNavigationBarLoading()
     return getRequest({
         url: url,
         method: 'GET',
@@ -56,6 +62,7 @@ function getRequest(url, data) {
  */
 function postRequest(url, data) {
     var postRequest = wxPromisify(wx.request)
+    wx.showNavigationBarLoading()
     return postRequest({
         url: url,
         method: 'POST',

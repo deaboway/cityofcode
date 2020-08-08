@@ -2,12 +2,12 @@
  * 
  * WordPres版微信小程序
  * author: jianbo
- * organization: 守望轩  www.watch-life.net
+ * organization: 代码之城  www.deaboway.com
  * github:    https://github.com/iamxjb/winxin-app-watch-life.net
  * 技术支持微信号：iamxjb
  * 开源协议：MIT
  * 
- *  *Copyright (c) 2017 https://www.watch-life.net All rights reserved.
+ *  *Copyright (c) 2017 https://www.deaboway.com All rights reserved.
  */
 
 var Api = require('../../utils/api.js');
@@ -15,6 +15,9 @@ var util = require('../../utils/util.js');
 var WxParse = require('../../wxParse/wxParse.js');
 var wxApi = require('../../utils/wxApi.js')
 var wxRequest = require('../../utils/wxRequest.js')
+
+var webSiteName= config.getWebsiteName;
+var domain =config.getDomain
 
 import config from '../../utils/config.js'
 
@@ -44,9 +47,11 @@ Page({
         { id: '1', name: '评论数', selected: true },
         { id: '2', name: '浏览数', selected: false },        
         { id: '3', name: '点赞数', selected: false },
-        { id: '4', name: '赞赏数', selected: false }
+        { id: '4', name: '鼓励数', selected: false }
     ],
     tab: '1',
+    webSiteName:webSiteName,
+    domain:domain
 
   },
   formSubmit: function (e) {
@@ -59,7 +64,7 @@ Page({
     })
   },
   onShareAppMessage: function () {
-    var title = "分享“"+ config.getWebsiteName +"”的热点文章。";
+    var title = "分享“"+ webSiteName +"”的文章排行。";
     var path ="pages/hot/hot";
     return {
       title: title,
@@ -70,6 +75,14 @@ Page({
       fail: function (res) {
         // 转发失败
       }
+    }
+  },
+   // 自定义分享朋友圈
+   onShareTimeline: function() {   
+    return {
+      title:  "“"+ webSiteName +"”的文章排行",
+      path: 'pages/hot/hot' ,
+      
     }
   },
   reload:function(e)
@@ -104,6 +117,14 @@ Page({
   
   onLoad: function (options) {
     var self = this;
+    wx.showShareMenu({
+            withShareTicket:true,
+            menus:['shareAppMessage','shareTimeline'],
+            success:function(e)
+            {
+              //console.log(e);
+            }
+      })
     this.fetchPostsData("1");
         
   },
@@ -123,10 +144,11 @@ Page({
         if (response.statusCode === 200) {
             self.setData({
                 showallDisplay: "block",
+                floatDisplay: "block",
                 postsList: self.data.postsList.concat(response.data.map(function (item) {
                     var strdate = item.post_date
                     if (item.post_thumbnail_image == null || item.post_thumbnail_image == '') {
-                      item.post_thumbnail_image = "../../images/deaboway-logo-132.jpg";
+                        item.post_thumbnail_image = '../../images/logo700.png';
                     }
                     item.post_date = util.cutstr(strdate, 10, 1);
                     return item;
@@ -134,12 +156,15 @@ Page({
 
             });
 
-        } else if (response.statusCode === 404) {            
-            wx.showModal({
-                title: '加载失败',
-                content: '加载数据失败,可能缺少相应的数据',
-                showCancel: false,
-            });
+        } else if (response.statusCode === 404) { 
+
+            // wx.showModal({
+            //     title: '加载失败',
+            //     content: '加载数据失败,可能缺少相应的数据',
+            //     showCancel: false,
+            // });
+
+            console.log('加载数据失败,可能缺少相应的数据'); 
         }
     })
     .catch(function () {
@@ -148,16 +173,16 @@ Page({
 
             self.setData({
                 showerror: "block",
-                floatDisplay: "none"
+                floatDisplay: "block"
             });
 
         }
         else {
-            wx.showModal({
-                title: '加载失败',
-                content: '加载数据失败,请重试.',
-                showCancel: false,
-            });
+            // wx.showModal({
+            //     title: '加载失败',
+            //     content: '加载数据失败,请重试.',
+            //     showCancel: false,
+            // });
         }
     })
     .finally(function () {

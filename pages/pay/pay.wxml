@@ -3,20 +3,21 @@
  * 
  * WordPres版微信小程序
  * author: jianbo
- * organization: 守望轩  www.watch-life.net
+ * organization: 代码之城  www.deaboway.com
  * github:    https://github.com/iamxjb/winxin-app-watch-life.net
  * 技术支持微信号：iamxjb
  * 开源协议：MIT
- * Copyright (c) 2017 https://www.watch-life.net All rights reserved.
+ * Copyright (c) 2017 https://www.deaboway.com All rights reserved.
  *
  */-->
 <import src="../../wxParse/wxParse.wxml"/>
 <import src="../../templates/header.wxml"/>
+<import src="../../templates/copyright.wxml" />
 
 <view class="container">
   <template is="tempHeader" /> 
 
-  <view class='title'>请选择赞赏的金额</view>
+  <view class='title'>请选{{praiseWord}}的金额</view>
 
   <view class="price-list">
     <view class="item" wx:for="{{prices}}" wx:key="item" data-item="{{item}}" bindtap="selectItem">
@@ -30,5 +31,8 @@
   <button class="cancel-button;margin-bottom: 40rpx" formType="submit" size="mini" bindtap="cancel">取消</button>
  </view>
 
-  <modal title="{{dialog.title}}" hidden="{{dialog.hidden}}" no-cancel bindconfirm="confirm">{{dialog.content}}</modal>
+  <view class="ditail-copyright" style="display:{{display}}">
+     <template is="tempCopyright" data="{{webSiteName:webSiteName,domain:domain}}"/>
+  </view>
+
 </view>

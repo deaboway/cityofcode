@@ -2,17 +2,20 @@
  * 
  * WordPres版微信小程序
  * author: jianbo
- * organization: 守望轩  www.watch-life.net
+ * organization: 代码之城  www.deaboway.com
  * github:    https://github.com/iamxjb/winxin-app-watch-life.net
  * 技术支持微信号：iamxjb
  * 开源协议：MIT
- * Copyright (c) 2017 https://www.watch-life.net All rights reserved.
+ * Copyright (c) 2017 https://www.deaboway.com All rights reserved.
  * 
  */
 
+import config from '../../utils/config.js'
 var Api = require('../../utils/api.js');
 var util = require('../../utils/util.js');
 var WxParse = require('../../wxParse/wxParse.js');
+var webSiteName= config.getWebsiteName;
+var domain =config.getDomain
 
 Page({
   data: {
@@ -20,7 +23,9 @@ Page({
     pageData: {},
     pagesList: {},
     hidden: false,
-    wxParseData: []
+    wxParseData: [],
+    webSiteName:webSiteName,
+    domain:domain
   },
   onLoad: function (options) {
     this.fetchData(options.id),
@@ -34,7 +39,7 @@ Page({
     wx.request({
       url: Api.getPageByID(id, { mdrender: false }),
       success: function (response) {
-        // console.log(response);
+        console.log(response);
         self.setData({
           pageData: response.data,
           // wxParseData: WxParse('md',response.data.content.rendered)

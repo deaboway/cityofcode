@@ -3,8 +3,8 @@
  * 
  * 
  * author: Di (微信小程序开发工程师)
- * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
- *               垂直微信小程序开发交流社区
+ * organization: WeAppDev(微信小程序)(http://weappdev.com)
+ *               垂直微信小程序开发
  * 
  * github地址: https://github.com/icindy/wxParse
  * 
@@ -109,14 +109,14 @@ function html2json(html, bindName) {
                     var name = attr.name;
                     var value = attr.value;
                     if (name == 'class') {
-                        // console.dir(value);
+                        //console.dir(value);
                         //  value = value.join("")
                         node.classStr = value;
                     }
                     // has multi attibutes
                     // make it array of attribute
                     if (name == 'style') {
-                        // console.dir(value);
+                        //console.dir(value);
                         //  value = value.join("")
                         node.styleStr = value;
                     }
