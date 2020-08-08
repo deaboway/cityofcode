@@ -18,9 +18,9 @@
   <view class="topic-list-item">
     <image src="{{categoriesImage}}" class="cover" mode="aspectFill">
     </image>
-    <view class="topic-content-brief">
+    <!-- <view class="topic-content-brief">
       <text>{{categoriesList.description}}</text>
-    </view>
+    </view> -->
   </view>
 </view>
 

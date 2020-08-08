@@ -112,11 +112,11 @@ module.exports = {
       var url ='';
       if (ids ==''){
           
-          url = HOST_URI + 'categories?per_page=100&orderby=count&order=desc&openid='+openid;
+          url = HOST_URI + 'categories?per_page=100&orderby=name&order=asc&openid='+openid;
       }
       else
       {
-          url = HOST_URI + 'categories?include=' + ids+'&orderby=count&order=desc&openid='+openid;
+          url = HOST_URI + 'categories?include=' + ids+'&orderby=name&order=asc&openid='+openid;
  
       }
    

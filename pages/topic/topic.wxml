@@ -15,9 +15,9 @@
           <image src="../../images/{{item.subimg}}" data-subflag="{{item.subflag}}" data-id="{{item.id}}" catchtap="postsub"></image>
         </view>
       </view>
-      <view class="topic-brief" data-item="{{item.name}}" data-id="{{item.id}}">
+      <!-- <view class="topic-brief" data-item="{{item.name}}" data-id="{{item.id}}">
         <text>{{item.description}}</text>
-      </view>
+      </view> -->
     </view>
   </block>
 </view>
